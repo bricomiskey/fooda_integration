@@ -1,0 +1,5 @@
+locations:
+- account_name: Chicago Account
+  building_name: Chicago Building 1
+  location_type: spot
+  name: Chicago Building 1 Cafeteria

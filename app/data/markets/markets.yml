@@ -1,0 +1,7 @@
+markets:
+- name: 'Chicago'
+  zip_codes:
+  - zipcode: '60654'
+- name: 'Nashville'
+  zip_codes:
+  - zipcode: '37115'

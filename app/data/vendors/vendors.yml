@@ -1,0 +1,30 @@
+vendors:
+- cuisine_list:
+    - American
+  internal_name: Leghorn Chicken
+  market_list:
+    - Chicago
+  name: Leghorn Chicken
+  vendor_type: Restaurant
+  menu_templates:
+    - cogs_cents: 0
+      name: Leghorn Chicken Menu Template
+      pricing_type: item_level
+      product_type: perks
+      retail_price_cents: 0
+      sell_price_cents: 0
+      start_date: '<%= Date.today.to_s %>'
+      menu_items:
+        - cogs_cents: 0
+          entrees: entrees
+          min_quantity: 0
+          name_public: Chicken Sandwich
+          name_vendor: Chicken Sandwich
+          perks_price_cents: 0
+          premium_cogs_cents: 0
+          premium_sell_price_cents: 0
+          prep_line: 1
+          retail_price_cents: 0
+          sell_price_cents: 0
+          sku: sku-chicken-sandwich
+          temperature_classification: Hot

@@ -1,0 +1,9 @@
+buildings:
+- address:
+    zip_code: '60654'
+  name: Chicago Building 1
+  timezone: Central Time (US & Canada)
+- address:
+    zip_code: '60654'
+  name: Chicago Building 2
+  timezone: Central Time (US & Canada)
