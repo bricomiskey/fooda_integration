@@ -46,13 +46,18 @@ options = {
       "#{Dir.pwd}/app/data/vendors/vendors.yml"
     ],
   },
+  partners: {
+    create: 0,
+    data: [
+      "#{Dir.pwd}/app/data/partners/partners.yml"
+    ],
+  }
 }
 
 parser = OptionParser.new do |opts|
 	opts.banner = "Usage: #{__FILE__} [options]"
-
   opts.on('-a', '--all', 'create all (optional)') do |s|
-    [:buildings, :locations, :markets, :vendors].each do |key|
+    [:buildings, :locations, :markets, :vendors, :partners].each do |key|
       options[key][:create] = 1
     end
 	end
@@ -76,6 +81,10 @@ parser = OptionParser.new do |opts|
   opts.on('-v', '--vendors', 'create vendors (optional)') do |s|
 		options[:vendors][:create] = 1
 	end
+
+  opts.on('-r', '--partners', 'create partners (optional)') do |s|
+                options[:partners][:create] = 1
+        end
 
   opts.on('-h', '--help', 'help') do
 		puts opts
@@ -137,5 +146,16 @@ if options[:popups] && options[:popups][:create].to_i == 1
 
     popup_data = PopupData.new
     popup_data.create(yaml['popups'].map{ |o| Hashie::Mash.new(o) })
+  end
+end
+
+if options[:partners] && options[:partners][:create].to_i == 1
+  logger.info 'create partners ...'
+
+  options[:partners][:data].each do |file|
+    yaml = load_file(file, erb: 1)
+
+    partner_data = PartnerData.new
+    partner_data.create(yaml['partners'].map{ |o| Hashie::Mash.new(o) })
   end
 end
