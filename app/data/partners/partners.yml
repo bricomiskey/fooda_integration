@@ -1,0 +1,49 @@
+partners:
+  - display_name:   <%= Faker::Company.name %>
+    internal_name:  <%= Faker::Company.name %>
+    payment_method: ach
+    address:
+      name:     <%= Faker::Name.name %>
+      address1: <%= Faker::Address.street_address %>
+      address2: <%= Faker::Address.secondary_address %>
+      city:     <%= Faker::Address.city %>
+      state:    <%= Faker::Address.state %>
+      zip_code: <%= Faker::Address.zip_code %>
+      country:  United States of America  
+    contact_info:
+      display_name: <%= Faker::Name.name %>
+      position:     <%= Faker::Company.profession %>
+      phone_number: <%= Faker::PhoneNumber.phone_number %>
+      email:        <%= Faker::Internet.email %>
+  - display_name:   <%= Faker::Company.name %>
+    internal_name:  <%= Faker::Company.name %>
+    payment_method: credit_card
+    address:
+      name:     <%= Faker::Name.name %>
+      address1: <%= Faker::Address.street_address %>
+      address2: <%= Faker::Address.secondary_address %>
+      city:     <%= Faker::Address.city %>
+      state:    <%= Faker::Address.state %>
+      zip_code: <%= Faker::Address.zip_code %>
+      country:  United States of America  
+    contact_info:
+      display_name: <%= Faker::Name.name %>
+      position:     <%= Faker::Company.profession %>
+      phone_number: <%= Faker::PhoneNumber.phone_number %>
+      email:        <%= Faker::Internet.email %>
+  - display_name:   <%= Faker::Company.name %>
+    internal_name:  <%= Faker::Company.name %>
+    payment_method: invoice
+    address:
+      name:     <%= Faker::Name.name %>
+      address1: <%= Faker::Address.street_address %>
+      address2: <%= Faker::Address.secondary_address %>
+      city:     <%= Faker::Address.city %>
+      state:    <%= Faker::Address.state %>
+      zip_code: <%= Faker::Address.zip_code %>
+      country:  United States of America  
+    contact_info:
+      display_name: <%= Faker::Name.name %>
+      position:     <%= Faker::Company.profession %>
+      phone_number: <%= Faker::PhoneNumber.phone_number %>
+      email:        <%= Faker::Internet.email %>

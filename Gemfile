@@ -39,6 +39,7 @@ group :development, :test do
   gem 'byebug'
   gem 'minitest-reporters'
   gem 'minitest-bang', require: false
+  gem 'pry-byebug'
 end
 
 group :development do
