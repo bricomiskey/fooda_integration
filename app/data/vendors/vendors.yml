@@ -1,30 +1,61 @@
 vendors:
-- cuisine_list:
-    - American
+- contacts:
+  - email: leghorn_chicken@gmail.com
+    event_notifications: true
+    meals_sold_reminder_notifications: true
+    name: 'Leghorn Chicken Contact'
+    site_directions_notifications: true
+  cuisine_list:
+  - American
   internal_name: Leghorn Chicken
   market_list:
-    - Chicago
+  - Chicago
   name: Leghorn Chicken
   vendor_type: Restaurant
   menu_templates:
-    - cogs_cents: 0
-      name: Leghorn Chicken Menu Template
-      pricing_type: item_level
-      product_type: perks
-      retail_price_cents: 0
-      sell_price_cents: 0
-      start_date: '<%= Date.today.to_s %>'
-      menu_items:
-        - cogs_cents: 0
-          entrees: entrees
-          min_quantity: 0
-          name_public: Chicken Sandwich
-          name_vendor: Chicken Sandwich
-          perks_price_cents: 0
-          premium_cogs_cents: 0
-          premium_sell_price_cents: 0
-          prep_line: 1
-          retail_price_cents: 0
-          sell_price_cents: 0
-          sku: sku-chicken-sandwich
-          temperature_classification: Hot
+  - cogs_cents: 0
+    name: Leghorn Chicken Popup Menu Template
+    pricing_type: item_level
+    product_type: perks
+    retail_price_cents: <%= rand(500..1000) %>
+    sell_price_cents: <%= rand(500..1000) %>
+    start_date: '<%= Date.today.to_s %>'
+    state: published
+    menu_items:
+    - cogs_cents: <%= rand(1..50) %>
+      description: Chicken Sandwich Popup description
+      meal_type: <%= %w{entrees appetizers}.sample %>
+      min_quantity: 0
+      name_public: Chicken Sandwich Popup
+      name_vendor: Chicken Sandwich Popup
+      perks_price_cents: 0
+      premium_cogs_cents: 0
+      premium_sell_price_cents: 0
+      prep_line: 1
+      retail_price_cents: <%= rand(500..1000) %>
+      sell_price_cents: <%= rand(500..1000) %>
+      sku: sku-chicken-sandwich
+      temperature_classification: Hot
+  - cogs_cents: <%= rand(1..50) %>
+    name: Leghorn Chicken Delivery Menu Template
+    pricing_type: item_level
+    product_type: select
+    retail_price_cents: <%= rand(500..1000) %>
+    sell_price_cents: <%= rand(500..1000) %>
+    start_date: '<%= Date.today.to_s %>'
+    state: published
+    menu_items:
+    - cogs_cents: <%= rand(1..50) %>
+      description: Chicken Sandwich Delivery description
+      meal_type: <%= %w{entrees appetizers}.sample %>
+      min_quantity: 0
+      name_public: Chicken Sandwich Delivery
+      name_vendor: Chicken Sandwich Delivery
+      perks_price_cents: 0
+      premium_cogs_cents: 0
+      premium_sell_price_cents: 0
+      prep_line: 1
+      retail_price_cents: <%= rand(500..1000) %>
+      sell_price_cents: <%= rand(500..1000) %>
+      sku: sku-chicken-sandwich
+      temperature_classification: Hot

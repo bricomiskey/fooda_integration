@@ -2,7 +2,7 @@ class LocationData < BaseData
 
   def create(objects)
     objects.each do |object|
-      location = find(object[:name])
+      location = exists(object[:name])
 
       if location.blank?
         _create_location(object)
@@ -10,19 +10,20 @@ class LocationData < BaseData
     end
   end
 
-  def find(name)
-    log "location:#{name}"
+  def exists(name)
+    log "location check:#{name}"
 
     response = Fooda::LocationsApi.get_by({name: name})
+    location = response.location
 
     if response.code != 200
-      log "location not found"
+      log "location check:#{name} not found"
       return nil
     end
 
-    log "location exists"
+    log "location check:#{name} exists"
 
-    response[:location]
+    location
   end
 
   protected
@@ -30,34 +31,48 @@ class LocationData < BaseData
   def _create_location(location_object)
     location_name = location_object[:name]
 
-    log "location:#{location_object}"
+    log "location create:#{location_object}"
 
-    account_name = location_object[:account_name]
-    building_name = location_object[:building_name]
+    if (account_name = location_object[:account_name]).present?
+      log "account resolve:#{account_name}"
 
-    if account_name.present?
-      # map account_name to object
-      account_data = AccountData.new
-      account = account_data.find_or_create(
-        account_name,
-        Hashie::Mash.new({
-          name: account_name,
-          account_type: 'enterprise',
-        })
-      )
+      response = Fooda::AccountsApi.get_by({
+        name: account_name
+      })
+      account = response.account
+
+      if response.code == 200
+        log "account resolve:#{account_name} ok"
+      else
+        log "account resolve:#{account_name} not found"
+      end
 
       location_object[:account_id] = account.try(:id)
     end
 
-    if building_name.present?
+    if (building_name = location_object[:building_name]).present?
+      log "building resolve:#{building_name}"
+
       # map building_name to object
-      building_data = BuildingData.new
-      building = BuildingData.new.find(building_name)
+      response = Fooda::BuildingsApi.get_by({
+        name: building_name
+      })
+      building = response.building
+
+      if response.code == 200
+        log "building resolve:#{building_name} ok"
+      else
+        log "building resolve:#{building_name} not found"
+      end
 
       location_object[:building_id] = building.try(:id)
     end
 
-    response = Fooda::LocationsApi.create({location: location_object})
+    response = Fooda::LocationsApi.create({
+      access_token: Token.map(Token::ADMIN_USER_EMAIL),
+      client_token: Token.get_client,
+      location: location_object,
+    })
 
     if [200,201].include?(response.code)
       log "location created"

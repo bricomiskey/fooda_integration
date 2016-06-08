@@ -10,7 +10,7 @@ module Fooda
     end
 
     def self.headers(options={})
-      options.merge(content_type: :json, accept: :json)
+      options.merge({'accept' => 'json', 'content_type' => 'application/json'})
     end
 
     def self.host
@@ -21,6 +21,13 @@ module Fooda
       Settings[Rails.env][:fooda_api_version]
     end
 
+    def self.version_1
+      Settings[Rails.env][:fooda_api_version_1]
+    end
+
+    def self.version_2
+      Settings[Rails.env][:fooda_api_version_2]
+    end
   end
 
 end

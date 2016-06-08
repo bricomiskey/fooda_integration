@@ -1,0 +1,15 @@
+users:
+- email: <%= Token::ADMIN_USER_EMAIL %>
+  first_name: Fooda
+  last_name: Admin
+  password: password
+  roles:
+  - super_admin
+# - email: delivery.customer@gmail.com
+#   first_name: <%= Faker::Name.first_name %>
+#   last_name: <%= Faker::Name.last_name %>
+#   password: secret
+# - email: popup.customer@gmail.com
+#   first_name: <%= Faker::Name.first_name %>
+#   last_name: <%= Faker::Name.last_name %>
+#   password: secret

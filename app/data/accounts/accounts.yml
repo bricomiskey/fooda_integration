@@ -1,0 +1,5 @@
+accounts:
+- name: Chicago Account
+  account_type: enterprise
+- name: Chicago Account 2
+  account_type: enterprise

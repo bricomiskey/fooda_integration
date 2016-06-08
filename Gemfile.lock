@@ -36,6 +36,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    ansi (1.5.0)
     arel (6.0.3)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -118,6 +119,13 @@ GEM
     mime-types-data (3.2016.0221)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
+    minitest-bang (1.0.4)
+      minitest (>= 4.7.5)
+    minitest-reporters (1.1.2)
+      ansi
+      builder
+      minitest (>= 5.0)
+      ruby-progressbar
     msgpack (0.5.12)
     multi_json (1.11.2)
     multi_xml (0.5.5)
@@ -156,6 +164,7 @@ GEM
     rdoc (4.2.2)
       json (~> 1.4)
     redis (3.1.0)
+    ruby-progressbar (1.7.5)
     sass (3.4.22)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -212,6 +221,8 @@ DEPENDENCIES
   kaminari
   lograge
   logstash-logger
+  minitest-bang
+  minitest-reporters
   paddock
   rack-cors
   rails (= 4.2.4)

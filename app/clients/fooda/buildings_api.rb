@@ -2,9 +2,14 @@ module Fooda
 
   class BuildingsApi < BaseApi
 
-    def self.change_state(id, event)
+    def self.add_user(id, params)
+      api = "#{host}#{version}/buildings/#{id}/users"
+      call(:post, api, "#{name.underscore}.#{__method__}", params)
+    end
+
+    def self.change_state(id, event, params)
       api = "#{host}#{version}/buildings/#{id}/event/#{event}"
-      call(:put, api, "#{name.underscore}.#{__method__}", {})
+      call(:put, api, "#{name.underscore}.#{__method__}", params)
     end
 
     def self.create(params)

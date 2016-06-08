@@ -2,4 +2,16 @@ locations:
 - account_name: Chicago Account
   building_name: Chicago Building 1
   location_type: spot
-  name: Chicago Building 1 Cafeteria
+  name: Chicago Building 1 Spot
+- account_name: Chicago Account
+  building_name: Chicago Building 1
+  location_type: delivery
+  name: Chicago Building 1 Delivery
+- account_name: Chicago Account
+  building_name: Chicago Building 2
+  location_type: spot
+  name: Chicago Building 2 Spot
+- account_name: Chicago Account
+  building_name: Chicago Building 2
+  location_type: delivery
+  name: Chicago Building 2 Delivery

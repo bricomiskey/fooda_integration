@@ -5,7 +5,7 @@ popups:
   event_start_time: '<%= (Time.now.utc.end_of_day + 12.hours).to_s(:db) %>'
   status: proposed
   popup_event_vendors:
-    - menu_template_name: Leghorn Chicken Menu Template
-      popup_event_location_name: Chicago Building 1 Cafeteria
-      site_fee_cents: <%= rand(100..500) %>
-      vendor_name: Leghorn Chicken
+  - menu_template_name: Leghorn Chicken Popup Menu Template
+    popup_event_location_name: Chicago Building 1 Spot
+    site_fee_cents: <%= rand(100..500) %>
+    vendor_name: Leghorn Chicken

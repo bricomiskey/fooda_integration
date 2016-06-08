@@ -1,5 +1,7 @@
 class BaseData
 
+  attr_reader :logger
+
   def initialize(options={})
     @logger = Logger.new(STDOUT)
   end

@@ -1,0 +1,14 @@
+select_events:
+- account_name: Chicago Account
+  default_gratuity: <%= rand(5..10).to_f %>
+  delivery_time: <%= (Time.now.utc + 24.hours + 2.hours).to_s(:ical_datetime_local) %>
+  meal_period: lunch
+  ordering_window_end_time: <%= (Time.now.utc + 24.hours).to_s(:ical_datetime_utc) %>
+  ordering_window_start_time: <%= (Time.now.utc - 1.minute).to_s(:ical_datetime_utc) %>
+  ready_and_bagged: <%= rand(30..60) %>
+  select_event_locations:
+  - location_name: Chicago Building 1 Delivery
+  select_event_vendors:
+  - menu_template_name: Leghorn Chicken Delivery Menu Template
+    vendor_name: Leghorn Chicken
+  status: active
