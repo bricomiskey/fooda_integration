@@ -19,6 +19,7 @@ class PopupCreateTest < ActionDispatch::IntegrationTest
   let(:vendor_name) { 'Leghorn Chicken' }
   let(:menu_template_name) { 'Leghorn Chicken Popup Menu Template' }
 
+  let(:popup_email_list_id) { '18277' }
   let(:popup_initial_status) { 'proposed' }
 
   let(:time_now) { Time.now }
@@ -28,12 +29,16 @@ class PopupCreateTest < ActionDispatch::IntegrationTest
     Hashie::Mash.new(
       account_name: account_name,
       building_name: building_name,
+      email_list_id: popup_email_list_id,
       event_end_time: (time_now_utc.end_of_day + 12.hours + 2.hours).to_s(:ical_datetime_utc),
       event_start_time:(time_now_utc.end_of_day + 12.hours).to_s(:ical_datetime_utc),
-      ignore_final_email: true,
+      ignore_final_email: false,
       ignore_introduction_email: true,
       meal_period: 'Lunch',
       status: popup_initial_status,
+      popup_event_locations: [
+        location_name: location_name,
+      ],
       popup_event_vendors: [
         {
           menu_template_name: menu_template_name,
@@ -95,28 +100,43 @@ class PopupCreateTest < ActionDispatch::IntegrationTest
 
     # schedule, then activate popup event
 
-    events = ['schedule', 'activate']
-    events.each do |event|
-      options = {
+    events = [
+      {event: 'schedule', params: {ssl_verify_off: 1, sync_workers: 1}},
+      {event: 'activate', params: {}}
+    ]
+    events.each do |hash|
+      event = hash[:event]
+      options = hash[:params].merge({
         access_token: admin_token,
         client_token: client_token,
-      }
+      })
       response = Fooda::PopupEventsApi.change_state(popup_event.id, event, options)
-      response.code.must_equal 200
+      puts response # xxx
+      # response.code.must_equal 200
     end
 
     options = {
       id: popup_event.id,
       access_token: admin_token,
       client_token: client_token,
+      with: ['event_campaigns'],
     }
     response = Fooda::PopupEventsApi.get_by(options)
     response.code.must_equal 200
 
-    # puts response
+    puts response
 
     popup_event = response.popup_event
     popup_event.status.must_equal 'active'
+
+    campaign = popup_event.event_campaigns.find do |campaign|
+      campaign.campaignable_type.match(/Popup/) && campaign.campaignable_id == popup_event.id
+    end
+    campaign.state.must_equal 'scheduled'
+    campaign.campaign_id.must_match(/^\d+$/)
+
+    response = ExpressPigeon::CampaignsApi._get(campaign.campaign_id)
+    response.code.must_equal 200
   end
 
 end

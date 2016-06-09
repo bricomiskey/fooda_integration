@@ -60,9 +60,20 @@ class PopupData < BaseData
       end
     end
 
-    popup_event_vendors = popup_object[:popup_event_vendors] || []
+    (popup_event_locations = popup_object[:popup_event_locations] || []).each do |popup_event_location|
+      if (location_name = popup_event_location[:location_name]).present?
+        log "popup location resolve:#{location_name}"
 
-    popup_event_vendors.each do |popup_event_vendor|
+        location = _resolve_location(location_name)
+        raise "popup location resolve:#{location_name} not found" if location.blank?
+
+        log "popup location resolve:#{location_name} exists"
+
+        popup_event_location[:location_id] = location.id
+      end
+    end
+
+    (popup_event_vendors = popup_object[:popup_event_vendors] || []).each do |popup_event_vendor|
       if (vendor_name = popup_event_vendor[:vendor_name]).present?
         log "popup vendor resolve:#{vendor_name}"
 
